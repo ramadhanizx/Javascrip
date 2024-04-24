@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Dialog with ProgressBar</title>
+    <!-- CSS untuk styling dialog -->
+    <style>
+        /* CSS untuk styling dialog */
+        #download-dialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        #progress-bar {
+            width: 100%;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        #progress {
+            width: 0%;
+            height: 20px;
+            background-color: #4caf50;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Struktur HTML untuk jendela dialog -->
+    <div id="download-dialog">
+        <h2>Downloading File</h2>
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+    </div>
+
+    <!-- jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Fungsi untuk menampilkan jendela dialog download
+            function showDownloadDialog() {
+                $('#download-dialog').fadeIn();
+                // Simulasi progress download
+                simulateDownload();
+            }
+
+            // Fungsi untuk menyembunyikan jendela dialog download
+            function hideDownloadDialog() {
+                $('#download-dialog').fadeOut();
+            }
+
+            // Fungsi untuk mensimulasikan progress download
+            function simulateDownload() {
+                var progress = 0;
+                var interval = setInterval(function () {
+                    progress += 5;
+                    $('#progress').css('width', progress + '%');
+                    // Jika progress mencapai 100%, hentikan simulasi dan sembunyikan dialog
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(hideDownloadDialog, 500);
+                    }
+                }, 500);
+            }
+
+            // Panggil fungsi showDownloadDialog saat dokumen selesai dimuat
+            showDownloadDialog();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="clock"></div>
+
+    <script>
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var day = now.getDate();
+            var month = now.getMonth() + 1; // January is 0
+            var year = now.getFullYear();
+
+            // Menambahkan leading zero jika diperlukan
+            hours = padZero(hours);
+            minutes = padZero(minutes);
+            seconds = padZero(seconds);
+            month = padZero(month);
+
+            // Menampilkan waktu dalam format hh:mm:ss
+            var timeString = hours + ":" + minutes + ":" + seconds;
+
+            // Menampilkan tanggal dalam format dd/mm/yyyy
+            var dateString = day + "/" + month + "/" + year;
+
+            // Menampilkan waktu dan tanggal dalam elemen dengan id "clock"
+            document.getElementById('clock').innerHTML = dateString + " " + timeString;
+
+            // Meneruskan pemanggilan updateTime setiap detik
+            setTimeout(updateTime, 1000);
+        }
+
+        function padZero(num) {
+            return (num < 10 ? '0' : '') + num;
+        }
+
+        // Memanggil updateTime untuk pertama kali untuk memulai perbaruan waktu
+        updateTime();
+    </script>
+</body>
+
+</html>
